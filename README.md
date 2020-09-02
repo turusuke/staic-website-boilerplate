@@ -1,0 +1,1 @@
+# staic-website-boilerplate
