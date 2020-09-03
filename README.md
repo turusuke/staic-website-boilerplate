@@ -1,1 +1,1 @@
-# staic-website-boilerplate
+# static-website-boilerplate
