@@ -1,0 +1,50 @@
+{
+  "name": "static-website-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "scripts": {
+    "build": "run-p build:**",
+    "build:js": "simplifyify src/**/*.js -o dist --bundle",
+    "build:html": "posthtml 'src/**/*.html' '!src/**/_*.html' -o dist --r src -a",
+    "build:scss": "sass src/scss:dist/css",
+    "build:css": "postcss \"dist/css/**/*.css\" --base dist --dir dist",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turusuke/static-website-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/turusuke/static-website-boilerplate/issues"
+  },
+  "homepage": "https://github.com/turusuke/static-website-boilerplate#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@jsdevtools/simplifyify": "^8.0.3",
+    "autoprefixer": "^9.8.6",
+    "babelify": "^10.0.0",
+    "chokidar": "^3.4.2",
+    "core-js": "^3.6.5",
+    "cpx": "^1.5.0",
+    "eslint": "^7.8.1",
+    "jest": "^26.4.2",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^7.0.32",
+    "postcss-cli": "^7.1.2",
+    "posthtml-cli": "^0.6.0",
+    "prettier": "^2.1.1",
+    "regenerator-runtime": "^0.13.7",
+    "sass": "^1.26.10",
+    "typescript": "^4.0.2"
+  }
+}
