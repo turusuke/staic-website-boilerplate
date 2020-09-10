@@ -1,0 +1,13 @@
+{
+  "plugins": {
+    "posthtml-include": {
+      "root": "src"
+    },
+    "posthtml-w3c": {},
+    "posthtml-beautify": {
+      "rules": {
+        "indent": 2
+      }
+    }
+  }
+}

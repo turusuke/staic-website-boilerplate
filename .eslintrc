@@ -1,0 +1,14 @@
+{
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true,
+  },
+  "globals": { // エラーにしたくないグローバル変数がある場合
+    //"$": true,
+    //"jQuery": true
+  },
+  "rules": {
+    "prettier/prettier": ["error", {}]
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "prettier"]
+}

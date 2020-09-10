@@ -12,7 +12,8 @@
     "build": "run-p build:**",
     "build:js": "simplifyify src/**/*.js -o dist --bundle",
     "build:html": "posthtml 'src/**/*.html' '!src/**/_*.html' -o dist --r src -a",
-    "build:scss": "sass src/scss:dist/css",
+    "watch:dev:scss": "sass --embed-source-map --watch src/scss:dist/css",
+    "build:scss": "sass --style=expanded --no-source-map src/scss:dist/css",
     "build:css": "postcss \"dist/css/**/*.css\" --base dist --dir dist",
     "test": "jest"
   },
@@ -37,14 +38,31 @@
     "core-js": "^3.6.5",
     "cpx": "^1.5.0",
     "eslint": "^7.8.1",
+    "husky": "^4.3.0",
     "jest": "^26.4.2",
+    "lint-staged": "^10.3.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.32",
     "postcss-cli": "^7.1.2",
+    "posthtml-beautify": "^0.7.0",
     "posthtml-cli": "^0.6.0",
+    "posthtml-include": "^1.4.3",
+    "posthtml-w3c": "^0.9.0",
     "prettier": "^2.1.1",
     "regenerator-runtime": "^0.13.7",
     "sass": "^1.26.10",
-    "typescript": "^4.0.2"
+    "stylelint": "^13.7.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,md}": "prettier --write"
   }
 }
