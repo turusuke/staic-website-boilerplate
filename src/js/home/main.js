@@ -1,10 +1,10 @@
 const wait = () =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
-    }, 0);
-  });
+      resolve()
+    }, 0)
+  })
 
-(async () => {
-  await wait();
-})();
+;(async () => {
+  await wait()
+})()

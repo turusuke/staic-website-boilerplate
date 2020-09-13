@@ -9,12 +9,23 @@
     ]
   },
   "scripts": {
+    "start": "run-s clean dev",
+    "dev": "run-p watch:** server",
     "build": "run-p build:**",
     "build:js": "simplifyify src/**/*.js -o dist --bundle",
-    "build:html": "posthtml 'src/**/*.html' '!src/**/_*.html' -o dist --r src -a",
-    "watch:dev:scss": "sass --embed-source-map --watch src/scss:dist/css",
+    "build:html": "posthtml \"src/**/*.html\" \"!src/**/_*.html\" -o dist -r src -a",
     "build:scss": "sass --style=expanded --no-source-map src/scss:dist/css",
     "build:css": "postcss \"dist/css/**/*.css\" --base dist --dir dist",
+    "clean": "run-p clean:**",
+    "clean:dist": "rimraf dist",
+    "cpx": "run-p cpx:*",
+    "cpx:assets": "cpx \"src/**/*.{png,jpg,gif,webp,avif,svg}\" dist",
+    "watch:dev:scss": "sass --embed-source-map --watch src/scss:dist/css",
+    "watch:js": "simplifyify \"src/**/*.js\" --outfile \"dist/**/*.js\" --watch",
+    "lint:css": "stylelint \"src/**/*.scss\" --syntax scss --config \"./.stylelintrc\"",
+    "lint:js": "eslint \"src/**/*.js\" --ignore-pattern \"*.config.js\"",
+    "lint:fix:js": "eslint --fix \"src/**/*.js\" --ignore-pattern \"/postcss.config.js/\"",
+    "server": "browser-sync start --server \"dist\" --files \"dist\"",
     "test": "jest"
   },
   "repository": {
@@ -31,13 +42,17 @@
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
+    "@commitlint/cli": "^9.1.2",
+    "@commitlint/config-conventional": "^11.0.0",
     "@jsdevtools/simplifyify": "^8.0.3",
     "autoprefixer": "^9.8.6",
     "babelify": "^10.0.0",
-    "chokidar": "^3.4.2",
+    "browser-sync": "^2.26.12",
     "core-js": "^3.6.5",
     "cpx": "^1.5.0",
     "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.3.0",
@@ -50,6 +65,7 @@
     "posthtml-w3c": "^0.9.0",
     "prettier": "^2.1.1",
     "regenerator-runtime": "^0.13.7",
+    "rimraf": "^3.0.2",
     "sass": "^1.26.10",
     "stylelint": "^13.7.0",
     "stylelint-config-standard": "^20.0.0",
@@ -58,11 +74,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
+    "*.js": "eslint --cache --fix --ignore-pattern \"*.config.js\"",
     "*.{js,css,md}": "prettier --write"
   }
 }
