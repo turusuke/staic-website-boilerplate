@@ -16,8 +16,9 @@ npm install --no-save
 ##
 
 - ESLint
-- JavaScript ファイルのコード品質の担保のため追加
+  - JavaScript ファイルのコード品質の担保のため追加
 - PostCSS
-- ビルドした CSS の加工に利用
+  - ビルドした CSS の加工に利用
+  - 例： autoprefixer でベンダープレフィックスの追加
 - PostHTML
--
+  - `<include>` タグを使ってパーツのコンポーネント化に利用
