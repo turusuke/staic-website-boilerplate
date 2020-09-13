@@ -11,7 +11,7 @@
   "scripts": {
     "start": "run-s clean dev",
     "dev": "run-p watch:** server",
-    "build": "run-p build:**",
+    "build": "run-s build:**",
     "build:js": "simplifyify src/**/*.js -o dist --bundle",
     "build:html": "posthtml \"src/**/*.html\" \"!src/**/_*.html\" -o dist -r src -a",
     "build:scss": "sass --style=expanded --no-source-map src/scss:dist/css",
@@ -20,7 +20,7 @@
     "clean:dist": "rimraf dist",
     "cpx": "run-p cpx:*",
     "cpx:assets": "cpx \"src/**/*.{png,jpg,gif,webp,avif,svg}\" dist",
-    "watch:dev:scss": "sass --embed-source-map --watch src/scss:dist/css",
+    "watch:scss": "sass --embed-source-map --watch src/scss:dist/css",
     "watch:js": "simplifyify \"src/**/*.js\" --outfile \"dist/**/*.js\" --watch",
     "lint:css": "stylelint \"src/**/*.scss\" --syntax scss --config \"./.stylelintrc\"",
     "lint:js": "eslint \"src/**/*.js\" --ignore-pattern \"*.config.js\"",
@@ -80,6 +80,7 @@
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix --ignore-pattern \"*.config.js\"",
-    "*.{js,css,md}": "prettier --write"
+    "*.{js,css,md}": "prettier --write",
+    "*.{scss}": "stylelint \"src/**/*.scss\" --syntax scss --config \"./.stylelintrc\""
   }
 }
