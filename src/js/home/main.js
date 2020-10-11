@@ -1,10 +1,9 @@
-const wait = () =>
+export const wait = () =>
   new Promise((resolve) => {
     setTimeout(() => {
-      resolve()
-    }, 0)
-  })
-
-;(async () => {
-  await wait()
-})()
+      resolve("done");
+    }, 0);
+  });
+(async () => {
+  await wait();
+})();
